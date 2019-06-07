@@ -96,7 +96,7 @@ public class ProfilesController {
 				allProfiles.setMonthlyIncome(eachProfile.getMonthlyIncome());
 				allProfiles.setMatchScore(matchCount);
 				allProfiles.setFoodHabit(eachProfile.getFoodHabit());
-				allProfiles.setHabit(eachProfile.getFoodHabit());
+				allProfiles.setHabit(eachProfile.getHabit());
 				allProfiles.setId(eachProfile.getId());
 				sortedList.add(allProfiles);
 				
