@@ -79,10 +79,10 @@ public class ProfilesController {
 				if(eachProfile.getFoodHabit().trim().equalsIgnoreCase(foodHabit)) {
 					matchCount = matchCount +16;
 				}
-				/*
-				 * if(eachProfile.getHabit().trim().equalsIgnoreCase(habit)) { matchCount =
-				 * matchCount +16; }
-				 */
+				
+				  if(eachProfile.getHabit().trim().equalsIgnoreCase(habit)) { matchCount =
+				  matchCount +16; }
+				 
 				if(eachProfile.getMonthlyIncome() > income) {
 					matchCount = matchCount +16;
 				}
@@ -94,6 +94,9 @@ public class ProfilesController {
 				allProfiles.setFirstName(eachProfile.getFirstName());
 				allProfiles.setMonthlyIncome(eachProfile.getMonthlyIncome());
 				allProfiles.setMatchScore(matchCount);
+				allProfiles.setFoodHabit(eachProfile.getFoodHabit());
+				allProfiles.setHabit(eachProfile.getFoodHabit());
+				allProfiles.setId(eachProfile.getId());
 				sortedList.add(allProfiles);
 				
 			
