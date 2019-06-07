@@ -63,13 +63,13 @@ public class UserProfile implements Serializable {
 	@Column(name = "Qualification")
 	private String qualification;
 
-	@Column(name = "User_Name")
+	@Column(name = "User_Name",unique = true)
 	private String userName;
 
 	@Column(name = "Password")
 	private String password;
 
-	@Column(name = "Email_Id")
+	@Column(name = "Email_Id",unique = true)
 	private String emailId;
 
 	@Column(name = "Food_Habits")
