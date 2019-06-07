@@ -51,7 +51,7 @@ public class UserProfile implements Serializable {
 	@Column(name = "City")
 	private String city;
 
-	@Column(name = "Montyhly_Income")
+	@Column(name = "Monthly_Income")
 	private Double monthlyIncome;
 
 	@Column(name = "Gender")
