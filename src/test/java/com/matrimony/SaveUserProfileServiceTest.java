@@ -3,7 +3,7 @@
  */
 package com.matrimony;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
@@ -46,8 +46,20 @@ public class SaveUserProfileServiceTest {
 		userProfileDTO.setId(1l);
 		SaveUserProfileResponse response = service.saveUserProfile(userProfileDTO);
 		assertNotNull(response.getStatus());
-	}	
-
+	}
 	
+	@Test
+	public void whileLoginUserProfile() {
+		UserProfile userProfile = new UserProfile();
+		userProfile.setUserName("logeshwarsekar@gmail.com");
+		userProfile.setPassword("logeshwar");
+		LoginRequest request = new LoginRequest();
+		request.setUserName("logeshwarsekar@gmail.com");
+		request.setPassword("logeshwar");
+		Mockito.when(repo.findByUserNameAndPassword("logeshwarsekar@gmail.com", "logeshwar")).thenReturn(userProfile);
+		LoginResponse response = service.findByUserNameAndPassword(request);
+		assertEquals(request.getUserName(),response.getUserName());
+		
+	}
 
 }
