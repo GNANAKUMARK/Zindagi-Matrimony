@@ -12,19 +12,19 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
-	private static final Logger LOGGER = LogManager.getLogger(CustomExceptionHandler.class);
+	private static final Logger LOGGER_OBJECT = LogManager.getLogger(CustomExceptionHandler.class);
 	@ExceptionHandler(Exception.class)
 	  public final ResponseEntity<ErrorDetails> handleUserNotFoundException(Exception ex, WebRequest request) {
 	    ErrorDetails errorDetails = new ErrorDetails( ex.getMessage(),
 	        request.getDescription(false));
-	    LOGGER.error(ex);
+	    LOGGER_OBJECT.error(ex);
 	    HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 	    if(ex instanceof DataNotFoundException ) {
 	    	status = HttpStatus.NOT_FOUND;
 	    } else if(ex instanceof BADRequestException) {
 	    	status = HttpStatus.BAD_REQUEST;
 	    }
-	    return new ResponseEntity<ErrorDetails>(errorDetails, status );
+	    return new ResponseEntity<>(errorDetails, status );
 	  }
 
 }
