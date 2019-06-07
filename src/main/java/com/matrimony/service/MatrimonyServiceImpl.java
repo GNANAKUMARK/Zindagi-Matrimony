@@ -42,7 +42,7 @@ public class MatrimonyServiceImpl implements MatrimonyService {
 		try {
 			userProfile = matrimonyRepository.save(userProfile);
 		} catch (DataIntegrityViolationException e) {
-			throw new BADRequestException("Username and EmailId already register. Please and new Username and Email");
+			throw new BADRequestException("Email ID already registered. Please enter new Email ID");
 		}
 		response.setStatus("UserProfile got save successfully with reference Id:" + userProfile.getId());
 		return response;
