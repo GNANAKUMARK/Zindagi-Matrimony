@@ -64,6 +64,7 @@ public class ProfilesController {
 				if (eachProfile.getId() == id) {
 					continue;
 				}
+				
 				if (eachProfile.getGender().trim().equalsIgnoreCase(gender)) {
 					continue;
 				}
