@@ -77,5 +77,8 @@ public class UserProfile implements Serializable {
 
 	@Column(name = "Age")
 	private Integer age;
+	
+	@Column(name="Habit")
+	private String habit;
 
 }
