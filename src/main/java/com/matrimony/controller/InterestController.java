@@ -77,7 +77,7 @@ public class InterestController {
 			
 		}
 		response.setStatus(msg);
-		return new ResponseEntity<InterestResponse>(response,HttpStatus.CREATED);
+		return new ResponseEntity<>(response,HttpStatus.CREATED);
 		
 	}
 }
