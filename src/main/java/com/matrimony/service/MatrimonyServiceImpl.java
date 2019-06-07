@@ -3,9 +3,11 @@ package com.matrimony.service;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.matrimony.entity.UserProfile;
+import com.matrimony.exception.BADRequestException;
 import com.matrimony.exception.DataNotFoundException;
 import com.matrimony.pojo.LoginRequest;
 import com.matrimony.pojo.LoginResponse;
@@ -37,22 +39,27 @@ public class MatrimonyServiceImpl implements MatrimonyService {
 		userProfile.setQualification(request.getQualification());
 		userProfile.setReligion(request.getReligion());
 		userProfile.setUserName(request.getUserName());
-		userProfile  = matrimonyRepository.save(userProfile);
-		response.setStatus("UserProfile got save successfully with reference Id:"+userProfile.getId());
+		try {
+			userProfile = matrimonyRepository.save(userProfile);
+		} catch (DataIntegrityViolationException e) {
+			throw new BADRequestException("Username and EmailId already register. Please and new Username and Email");
+		}
+		response.setStatus("UserProfile got save successfully with reference Id:" + userProfile.getId());
 		return response;
 	}
-	
+
 	@Transactional
-	public LoginResponse findByUserNameAndPassword(LoginRequest loginRequest)throws DataNotFoundException {
-		UserProfile user = matrimonyRepository.findByUserNameAndPassword(loginRequest.getUserName(),loginRequest.getPassword());
+	public LoginResponse findByUserNameAndPassword(LoginRequest loginRequest) throws DataNotFoundException {
+		UserProfile user = matrimonyRepository.findByUserNameAndPassword(loginRequest.getUserName(),
+				loginRequest.getPassword());
 		LoginResponse response = new LoginResponse();
-	
+
 		response.setId(user.getId());
 		response.setGender(user.getGender());
-		response.setUserName(user.getUserName());	
+		response.setUserName(user.getUserName());
 
-		return response;	
-		
+		return response;
+
 	}
 
 }
