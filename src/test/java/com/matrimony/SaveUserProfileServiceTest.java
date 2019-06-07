@@ -3,7 +3,7 @@
  */
 package com.matrimony;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.matrimony.entity.UserProfile;
+import com.matrimony.exception.DataNotFoundException;
 import com.matrimony.pojo.LoginRequest;
 import com.matrimony.pojo.LoginResponse;
 import com.matrimony.pojo.SaveUserProfileResponse;
@@ -46,8 +47,36 @@ public class SaveUserProfileServiceTest {
 		userProfileDTO.setId(1l);
 		SaveUserProfileResponse response = service.saveUserProfile(userProfileDTO);
 		assertNotNull(response.getStatus());
-	}	
-
+	}
 	
+	@Test(expected = DataNotFoundException.class)
+	public void whileLoginUserProfile() {
+		UserProfile userProfile = new UserProfile();
+		userProfile.setUserName("logeshwarsekar@gmail.com");
+		userProfile.setPassword("logeshwar");
+		LoginRequest request = new LoginRequest();
+		request.setUserName("logeshwarsekar@gmail.com");
+		request.setPassword("logeshwar");
+		//Mockito.when(repo.findByUserNameAndPassword("logeshwarsekar@gmail.com", "logeshwar")).thenReturn(userProfile);
+		Mockito.when(repo.findByUserNameAndPassword(Matchers.anyObject(), Matchers.anyObject())).thenReturn(userProfile);
+		LoginResponse response = service.findByUserNameAndPassword(request);
+		assertEquals(request.getUserName(),response.getUserName());
+		
+	}
 
+	@Test
+	public void whileLoginUserProfile1() {
+		UserProfile userProfile = new UserProfile();
+		userProfile.setId(1l);
+		userProfile.setUserName("logeshwarsekar@gmail.com");
+		userProfile.setPassword("logeshwar");
+		LoginRequest request = new LoginRequest();
+		request.setUserName("logeshwarsekar@gmail.com");
+		request.setPassword("logeshwar");
+		//Mockito.when(repo.findByUserNameAndPassword("logeshwarsekar@gmail.com", "logeshwar")).thenReturn(userProfile);
+		Mockito.when(repo.findByUserNameAndPassword(Matchers.anyObject(), Matchers.anyObject())).thenReturn(userProfile);
+		LoginResponse response = service.findByUserNameAndPassword(request);
+		assertEquals(request.getUserName(),response.getUserName());
+		
+	}
 }

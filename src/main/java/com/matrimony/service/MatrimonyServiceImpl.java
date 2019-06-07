@@ -42,7 +42,7 @@ public class MatrimonyServiceImpl implements MatrimonyService {
 		try {
 			userProfile = matrimonyRepository.save(userProfile);
 		} catch (DataIntegrityViolationException e) {
-			throw new BADRequestException("Username and EmailId already register. Please and new Username and Email");
+			throw new BADRequestException("Email ID already registered. Please enter new Email ID");
 		}
 		response.setStatus("UserProfile got save successfully with reference Id:" + userProfile.getId());
 		return response;
@@ -53,7 +53,9 @@ public class MatrimonyServiceImpl implements MatrimonyService {
 		UserProfile user = matrimonyRepository.findByUserNameAndPassword(loginRequest.getUserName(),
 				loginRequest.getPassword());
 		LoginResponse response = new LoginResponse();
-
+		if(user ==null || user.getId() ==null) {
+			throw new DataNotFoundException("Invalid Credentials"); 
+		}
 		response.setId(user.getId());
 		response.setGender(user.getGender());
 		response.setUserName(user.getUserName());
