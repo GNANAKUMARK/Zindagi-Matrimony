@@ -1,9 +1,14 @@
 package com.matrimony.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.matrimony.entity.UserProfile;
+import com.matrimony.exception.DataNotFoundException;
+import com.matrimony.pojo.LoginRequest;
+import com.matrimony.pojo.LoginResponse;
 import com.matrimony.pojo.SaveUserProfileResponse;
 import com.matrimony.pojo.UserProfileDTO;
 import com.matrimony.repository.MatrimonyRepository;
@@ -35,6 +40,19 @@ public class MatrimonyServiceImpl implements MatrimonyService {
 		userProfile  = matrimonyRepository.save(userProfile);
 		response.setStatus("UserProfile got save successfully with reference Id:"+userProfile.getId());
 		return response;
+	}
+	
+	@Transactional
+	public LoginResponse findByUserNameAndPassword(LoginRequest loginRequest)throws DataNotFoundException {
+		UserProfile user = matrimonyRepository.findByUserNameAndPassword(loginRequest.getUserName(),loginRequest.getPassword());
+		LoginResponse response = new LoginResponse();
+	
+		response.setId(user.getId());
+		response.setGender(user.getGender());
+		response.setUserName(user.getUserName());	
+
+		return response;	
+		
 	}
 
 }
