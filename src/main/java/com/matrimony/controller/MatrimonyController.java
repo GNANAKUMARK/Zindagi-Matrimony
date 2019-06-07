@@ -34,7 +34,7 @@ public class MatrimonyController {
 		return new ResponseEntity<>(response,HttpStatus.CREATED);
 	}
 
-	@PostMapping("/users")
+	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> loginPage(@RequestBody LoginRequest loginRequest){
 		
 		LoginRequest request = new LoginRequest();
