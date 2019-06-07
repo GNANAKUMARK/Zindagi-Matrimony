@@ -48,5 +48,7 @@ public class UserProfileDTO implements Serializable {
 	private String foodHabit;
 
 	private Integer age;
+	
+	private String habit;
 
 }
