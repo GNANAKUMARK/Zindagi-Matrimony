@@ -2,12 +2,15 @@ package com.matrimony.pojo;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  * Container for UserProfile DTO
+ * 
  * @author user1
  *
  */
@@ -21,6 +24,7 @@ public class UserProfileDTO implements Serializable {
 		 */
 	private static final long serialVersionUID = 1L;
 
+	@JsonIgnore
 	private Long id;
 
 	private String firstName;
@@ -48,7 +52,7 @@ public class UserProfileDTO implements Serializable {
 	private String foodHabit;
 
 	private Integer age;
-	
+
 	private String habit;
 
 }
