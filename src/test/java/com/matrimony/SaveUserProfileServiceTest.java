@@ -3,6 +3,7 @@
  */
 package com.matrimony;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
@@ -15,6 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.matrimony.entity.UserProfile;
+import com.matrimony.pojo.LoginRequest;
+import com.matrimony.pojo.LoginResponse;
 import com.matrimony.pojo.SaveUserProfileResponse;
 import com.matrimony.pojo.UserProfileDTO;
 import com.matrimony.repository.MatrimonyRepository;
@@ -43,6 +46,8 @@ public class SaveUserProfileServiceTest {
 		userProfileDTO.setId(1l);
 		SaveUserProfileResponse response = service.saveUserProfile(userProfileDTO);
 		assertNotNull(response.getStatus());
-	}
+	}	
+
+	
 
 }
