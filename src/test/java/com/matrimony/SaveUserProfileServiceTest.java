@@ -55,9 +55,9 @@ public class SaveUserProfileServiceTest {
 	public void saveuserProfileBADRequest() {
 		UserProfile userProfile = new UserProfile();
 		userProfile.setId(1l);
-		Mockito.when(repo.save(Matchers.anyObject())).thenReturn(new DataIntegrityViolationException(""));
+		Mockito.when(repo.save(Matchers.anyObject())).thenThrow(new DataIntegrityViolationException(""));
 		UserProfileDTO userProfileDTO = new UserProfileDTO();
-		userProfileDTO.setId(1l);
+		//userProfileDTO.setId(1l);
 		SaveUserProfileResponse response = service.saveUserProfile(userProfileDTO);
 		assertNotNull(response.getStatus());
 	}
