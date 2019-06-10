@@ -21,6 +21,7 @@ public class MatrimonyServiceImpl implements MatrimonyService {
 	MatrimonyRepository matrimonyRepository;
 
 	@Override
+	@Transactional
 	public SaveUserProfileResponse saveUserProfile(UserProfileDTO request) {
 		UserProfile userProfile = new UserProfile();
 		SaveUserProfileResponse response = new SaveUserProfileResponse();
@@ -50,9 +51,9 @@ public class MatrimonyServiceImpl implements MatrimonyService {
 
 	@Transactional
 	public LoginResponse findByUserNameAndPassword(LoginRequest loginRequest) throws DataNotFoundException {
+		LoginResponse response = new LoginResponse();
 		UserProfile user = matrimonyRepository.findByUserNameAndPassword(loginRequest.getUserName(),
 				loginRequest.getPassword());
-		LoginResponse response = new LoginResponse();
 		if(user ==null || user.getId() ==null) {
 			throw new DataNotFoundException("Invalid Credentials"); 
 		}

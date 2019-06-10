@@ -37,10 +37,8 @@ public class MatrimonyController {
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> loginPage(@RequestBody LoginRequest loginRequest){
 		
-		LoginRequest request = new LoginRequest();
 		LoginResponse response = matrimonyService.findByUserNameAndPassword(loginRequest);
-		UserProfileDTO userProfileDTO = new UserProfileDTO();
-		if(request.getUserName()== userProfileDTO.getUserName() && request.getPassword() == userProfileDTO.getPassword()){
+		if(loginRequest.getUserName().equals( response.getUserName())){
 			response.setStatus("Successfully Logged in.....");
 			return new ResponseEntity<LoginResponse>(response,HttpStatus.OK);
 		}
