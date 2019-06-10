@@ -13,9 +13,11 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.matrimony.entity.UserProfile;
+import com.matrimony.exception.BADRequestException;
 import com.matrimony.exception.DataNotFoundException;
 import com.matrimony.pojo.LoginRequest;
 import com.matrimony.pojo.LoginResponse;
@@ -45,6 +47,17 @@ public class SaveUserProfileServiceTest {
 		Mockito.when(repo.save(Matchers.anyObject())).thenReturn(userProfile);
 		UserProfileDTO userProfileDTO = new UserProfileDTO();
 		userProfileDTO.setId(1l);
+		SaveUserProfileResponse response = service.saveUserProfile(userProfileDTO);
+		assertNotNull(response.getStatus());
+	}
+	
+	@Test(expected=Exception.class)
+	public void saveuserProfileBADRequest() {
+		UserProfile userProfile = new UserProfile();
+		userProfile.setId(1l);
+		Mockito.when(repo.save(Matchers.anyObject())).thenThrow(new DataIntegrityViolationException(""));
+		UserProfileDTO userProfileDTO = new UserProfileDTO();
+		//userProfileDTO.setId(1l);
 		SaveUserProfileResponse response = service.saveUserProfile(userProfileDTO);
 		assertNotNull(response.getStatus());
 	}
