@@ -98,6 +98,7 @@ public class ProfilesController {
 				allProfiles.setFoodHabit(eachProfile.getFoodHabit());
 				allProfiles.setHabit(eachProfile.getHabit());
 				allProfiles.setId(eachProfile.getId());
+				allProfiles.setEmailId(eachProfile.getEmailId());
 				sortedList.add(allProfiles);
 				
 			

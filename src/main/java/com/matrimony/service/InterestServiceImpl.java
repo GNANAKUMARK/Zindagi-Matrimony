@@ -13,11 +13,18 @@ import com.matrimony.repository.InterestRepository;
 import com.matrimony.repository.MatrimonyRepository;
 
 @Service
+@SuppressWarnings(value = { "all" })
 public class InterestServiceImpl implements InterestService{
 
 	@Autowired
 	InterestRepository repository;
 	
+	@Autowired
+	SmsService smsService;
+	
+	
+	@Autowired
+	MailService mailService;
 	@Autowired
 	MatrimonyRepository repo;
 	
@@ -40,6 +47,7 @@ public class InterestServiceImpl implements InterestService{
 
 	@Override
 	public InterestResponse save(InterestRequest request) {
+		String mail =request.getReceiverEmail();
 		InterestResponse response = new InterestResponse();
 		ProfileInterest interest = new ProfileInterest();
 		interest.setReceiverAge(request.getReceiverAge());
@@ -48,8 +56,16 @@ public class InterestServiceImpl implements InterestService{
 		interest.setReceiverSalary(request.getReceiverSalary());
 		interest.setReceiverUserId(request.getReceiverUserId());
 		interest.setSenderUserId(request.getSenderUserId());
+		 try {
+				//mailService.sendOTPEmail(mail);
+			 smsService.sms();
+			} catch(Exception e) {
+				
+			}
 		 interest = repository.save(interest);
+		
 		 response.setId(interest.getId());
+		 
 		return response;
 		
 		

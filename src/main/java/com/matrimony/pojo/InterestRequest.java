@@ -13,5 +13,6 @@ public class InterestRequest {
 	private String receiverFirstName;
 	private String receiverLastName;
 	private Integer receiverAge;
+	private String receiverEmail;
 	private Double receiverSalary;
 }
