@@ -3,7 +3,9 @@
  */
 package com.matrimony;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Test;
@@ -18,6 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.matrimony.controller.MatrimonyController;
+import com.matrimony.pojo.LoginRequest;
+import com.matrimony.pojo.LoginResponse;
 import com.matrimony.pojo.SaveUserProfileResponse;
 import com.matrimony.pojo.UserProfileDTO;
 import com.matrimony.service.MatrimonyService;
@@ -51,6 +55,26 @@ public class SaveUserProfileControllerTest {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	@Test
+	public void whileLogin() throws Exception{
+		LoginResponse response = new LoginResponse();
+		LoginRequest request = new LoginRequest();
+		request.setUserName("logeshwarsekar@gmail.com");
+		request.setPassword("logeshwar");
+		response.setId(2L);
+		response.setGender("male");
+		response.setStatus("Login Successfully");
+		response.setUserName("logeshwarsekar@gmail.com");
+		Mockito.when(service.findByUserNameAndPassword(request)).thenReturn(response);
+		assertThat(request.getUserName()).isEqualTo(response.getUserName());
+		/*
+		 * mockMvc.perform(post("/api/login").contentType(MediaType.APPLICATION_JSON).
+		 * content(asJsonString(response)))
+		 * .andExpect(status().isOk()).andExpect(jsonPath("$[0].id").exists());
+		 */
+		
 	}
 
 }
