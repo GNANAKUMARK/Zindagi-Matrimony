@@ -66,7 +66,7 @@ public class InterestControllerTest {
 			list.add(interest);
 			Mockito.when(service.findRequestById(interest.getReceiverUserId())).thenReturn(list);
 			
-			mockMvc.perform(get("/api/Requests/{id}",2).accept(MediaType.
+			mockMvc.perform(get("/api/FromRequests/{id}",2).accept(MediaType.
 					 APPLICATION_JSON))
 					.andExpect(status().isOk()).andDo(print()); 
 		}
@@ -85,7 +85,7 @@ public class InterestControllerTest {
 			list.add(interest);
 			Mockito.when(service.findSentRequestById(interest.getSenderUserId())).thenReturn(list);
 			
-			mockMvc.perform(get("/api/SentRequests/{id}",2).accept(MediaType.
+			mockMvc.perform(get("/api/ToRequests/{id}",2).accept(MediaType.
 					 APPLICATION_JSON))
 					.andExpect(status().isOk()).andDo(print()); 
 		}
