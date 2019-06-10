@@ -32,7 +32,7 @@ public class InterestController {
 	InterestService service;
 	
 	
-	@GetMapping("/Requests/{id}")
+	@GetMapping("/FromRequests/{id}")
 	public ResponseEntity<List<UserProfile>> getPendingRequests(@PathVariable("id") Long id){
 		List<ProfileInterest> list = service.findRequestById(id);
 		if(list.isEmpty()) {
@@ -49,7 +49,7 @@ public class InterestController {
 	}
 	
 	
-	@GetMapping("/SentRequests/{id}")
+	@GetMapping("/ToRequests/{id}")
 	public ResponseEntity<List<UserProfile>> getSentRequests(@PathVariable("id") Long id){
 		List<ProfileInterest> list = service.findSentRequestById(id);
 		if(list.isEmpty()) {
