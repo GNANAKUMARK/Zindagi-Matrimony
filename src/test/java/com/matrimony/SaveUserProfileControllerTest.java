@@ -71,6 +71,7 @@ public class SaveUserProfileControllerTest {
 		assertThat(request.getUserName()).isEqualTo(response.getUserName());
 		/*
 		 * mockMvc.perform(post("/api/login").contentType(MediaType.APPLICATION_JSON).
+		 * 
 		 * content(asJsonString(response)))
 		 * .andExpect(status().isOk()).andExpect(jsonPath("$[0].id").exists());
 		 */
